@@ -10,13 +10,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pageObject.Branches;
 import pageObject.HomePage;
 import pageObject.SearchResult;
+import pageObject.SingleBranch;
 
-public class Test1 {
+public class Test1 extends BaseTest{
 
 
-    WebDriver driver;
 
-//    @Test
+
+   @Test
     public void search(){
 
         HomePage homePage = new HomePage(driver);
@@ -33,25 +34,21 @@ public class Test1 {
     @Test
     public void branches(){
         HomePage homePage = new HomePage(driver);
+        Branches branchesPage=homePage.clickBranches();
+        WebElement titleElement = driver.findElement(By.xpath("//*[@id=\"mainContent\"]/div[1]/h1"));
 
-        homePage.clickBranches();
-
+        // Get the text of the element
+        String title = titleElement.getText();
+        String expTitle="סניפים וערוצי שרות";
+        // Verify that the title contains the expected text
+        Assertions.assertEquals(expTitle, title);
+        SingleBranch singleBranch=branchesPage.getRandomBranch();
+        Assertions.assertTrue(singleBranch.checkInformationExistance());
 
     }
 
 
 
 
-    @BeforeEach
-    public void startDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        driver.get("https://www.btl.gov.il/");
-    }
 
-    @AfterEach
-    public void closeDriver() {
-        driver.quit();
-    }
 }
