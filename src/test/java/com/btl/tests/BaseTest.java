@@ -1,12 +1,14 @@
-import io.github.bonigarcia.wdm.WebDriverManager;
+package com.btl.tests;
+
+import com.btl.extensions.DriverExtension;
+import com.btl.extensions.ReportExtension;
+import com.btl.managers.DriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.junit.jupiter.api.extension.ExtendWith;
 
-import java.sql.DriverManager;
 import java.time.Duration;
 
 @ExtendWith({DriverExtension.class, ReportExtension.class})
@@ -17,15 +19,14 @@ public abstract class BaseTest {
     protected WebDriverWait wait;
 
     @BeforeEach
-    public void startDriver() {
-        WebDriverManager.chromedriver().setup();
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+    public void setUp() {
+        driver = DriverManager.getDriver();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get("https://www.btl.gov.il/");
     }
 
     @AfterEach
-    public void closeDriver() {
-        driver.quit();
+    public void tearDown() {
+        DriverManager.quitDriver();
     }
 }

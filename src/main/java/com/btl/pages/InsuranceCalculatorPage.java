@@ -1,4 +1,4 @@
-package pageObject;
+package com.btl.pages;
 
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
@@ -9,7 +9,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-public class InsuranceCalculatorPage extends BtlBasePage{
+public class InsuranceCalculatorPage extends BtlBasePage {
+
     @FindBy(xpath = "//h1[normalize-space(.)='חישוב דמי ביטוח עבור עצמאי, תלמיד, שוהה בחוץ לארץ ומי שלא עובד']")
     private WebElement pageTitle;
 
@@ -70,11 +71,11 @@ public class InsuranceCalculatorPage extends BtlBasePage{
         birthDateInput.sendKeys(formattedDate);
     }
 
-    public String getStepHeaderText() {
+        public String getStepHeaderText() {
         wait.until(ExpectedConditions.visibilityOf(stepHeader));
         return stepHeader.getText();
     }
-
+    
     public void selectDisabilityNo() {
         wait.until(ExpectedConditions.visibilityOf(disabilityNoRadio));
         scrollToElement(disabilityNoRadio);

@@ -1,6 +1,9 @@
+package com.btl.tests;
+
+import com.btl.pages.InsuranceCalculatorPage;
+import com.btl.pages.NationalInsurancePage;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import pageObject.InsuranceCalculatorPage;
 
 import java.time.LocalDate;
 
